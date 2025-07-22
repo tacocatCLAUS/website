@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>my portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Before anything renders, decide what to load
+    document.addEventListener("DOMContentLoaded", function () {
+      const isMobile = window.innerWidth <= 768; // basic mobile detection
+
+      // Create a script tag to inject the correct content
+      const file = isMobile ? "grey.html" : "picker.html";
+      fetch(file)
+        .then(res => res.text())
+        .then(html => {
+          document.open();
+          document.write(html);
+          document.close();
+        })
+        .catch(err => {
+          document.body.innerHTML = "<h1>Failed to load content.</h1>";
+          console.error("Error loading content:", err);
+        });
+    });
+  </script>
+</head>
+<body style="background: #111; color: #ccc; font-family: sans-serif;">
+  <noscript>Please enable JavaScript to load the appropriate layout.</noscript>
+</body>
+</html>
